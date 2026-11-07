@@ -1,1 +1,202 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080b14">
+
+    <title>NEXORA AI — Inteligência para transformar</title>
+
+    <meta name="description" content="NEXORA AI: sua plataforma inteligente para produtividade, criatividade e negócios.">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- MENU LATERAL -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">N</div>
+                <div class="brand-name">
+                    NEXORA
+                    <span>ARTIFICIAL INTELLIGENCE</span>
+                </div>
+            </div>
+
+            <button class="new-chat" id="newChat">
+                <span>＋</span> Nova conversa
+            </button>
+
+            <div class="menu-section">
+                <p class="section-title">PLATAFORMA</p>
+
+                <button class="menu-item active">
+                    <span>◈</span> NEXORA Chat
+                </button>
+
+                <button class="menu-item">
+                    <span>✧</span> NEXORA Writer
+                    <small>EM BREVE</small>
+                </button>
+
+                <button class="menu-item">
+                    <span>▤</span> NEXORA Business
+                    <small>EM BREVE</small>
+                </button>
+
+                <button class="menu-item">
+                    <span>⌕</span> NEXORA Research
+                    <small>EM BREVE</small>
+                </button>
+            </div>
+
+            <div class="menu-section history">
+                <p class="section-title">RECENTES</p>
+                <div id="historyList">
+                    <p class="empty-history">Suas conversas aparecerão aqui.</p>
+                </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="plan-card">
+                    <span class="plan-label">SEU PLANO</span>
+                    <strong>NEXORA Free</strong>
+                    <p>Bem-vindo à inteligência.</p>
+                    <button id="upgradeButton">Conhecer planos ↗</button>
+                </div>
+
+                <button class="profile">
+                    <div class="avatar">N</div>
+                    <div>
+                        <strong>Meu perfil</strong>
+                        <span>Conta gratuita</span>
+                    </div>
+                    <span class="profile-dots">•••</span>
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <button class="mobile-menu" id="mobileMenu">☰</button>
+
+                <div class="topbar-left">
+                    <span class="breadcrumb">Plataforma</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <strong>NEXORA Chat</strong>
+                </div>
+
+                <div class="topbar-right">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">Sistema inicializado</span>
+                </div>
+            </header>
+
+            <!-- ÁREA DE BOAS-VINDAS -->
+            <section class="welcome-screen" id="welcomeScreen">
+
+                <div class="welcome-content">
+
+                    <div class="ai-symbol">
+                        <div class="symbol-core">N</div>
+                        <div class="symbol-orbit"></div>
+                    </div>
+
+                    <div class="welcome-label">
+                        NEXORA INTELLIGENCE
+                    </div>
+
+                    <h1>
+                        Inteligência para<br>
+                        <span>ir além.</span>
+                    </h1>
+
+                    <p class="welcome-description">
+                        Sua nova experiência de inteligência artificial.
+                        Explore ideias, resolva problemas e transforme
+                        possibilidades em resultados.
+                    </p>
+
+                    <div class="suggestions">
+
+                        <button class="suggestion-card" data-prompt="Ajude-me a criar um plano de negócios.">
+                            <span>◈</span>
+                            <strong>Estratégia</strong>
+                            <small>Desenvolva ideias e negócios</small>
+                        </button>
+
+                        <button class="suggestion-card" data-prompt="Ajude-me a escrever um texto profissional.">
+                            <span>✧</span>
+                            <strong>Criatividade</strong>
+                            <small>Crie textos e conteúdos</small>
+                        </button>
+
+                        <button class="suggestion-card" data-prompt="Explique um assunto complexo de forma simples.">
+                            <span>⌘</span>
+                            <strong>Conhecimento</strong>
+                            <small>Aprenda algo novo</small>
+                        </button>
+
+                        <button class="suggestion-card" data-prompt="Ajude-me a desenvolver um projeto tecnológico.">
+                            <span>⌬</span>
+                            <strong>Tecnologia</strong>
+                            <small>Construa novos projetos</small>
+                        </button>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ÁREA DE CONVERSA -->
+            <section class="chat-area" id="chatArea" hidden>
+                <div class="messages" id="messages"></div>
+            </section>
+
+            <!-- CAMPO DE MENSAGEM -->
+            <footer class="composer-area">
+
+                <div class="composer">
+
+                    <textarea
+                        id="messageInput"
+                        placeholder="Pergunte qualquer coisa à NEXORA..."
+                        rows="1"
+                    ></textarea>
+
+                    <div class="composer-bottom">
+                        <div class="composer-tools">
+                            <span class="model-indicator">◈ NEXORA AI</span>
+                            <span class="model-version">Versão 1.0</span>
+                        </div>
+
+                        <button id="sendButton" class="send-button" aria-label="Enviar mensagem">
+                            ↑
+                        </button>
+                    </div>
+
+                </div>
+
+                <p class="disclaimer">
+                    A NEXORA pode cometer erros. Verifique informações importantes.
+                </p>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
+
