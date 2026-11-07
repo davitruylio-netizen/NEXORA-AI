@@ -1,5 +1,6 @@
 
 const http = require("http");
+const { generateAIResponse } = require("./ai");
 
 const PORT = process.env.PORT || 3000;
 
@@ -30,14 +31,20 @@ const server = http.createServer((req, res) => {
 
         req.on("data", chunk => {
             body += chunk.toString();
+
+            if (body.length > 100000) {
+                req.destroy();
+            }
         });
 
-        req.on("end", () => {
+        req.on("end", async () => {
             try {
                 const data = JSON.parse(body);
-                const message = data.message;
 
-                if (typeof message !== "string" || !message.trim()) {
+                if (
+                    typeof data.message !== "string" ||
+                    !data.message.trim()
+                ) {
                     res.writeHead(400);
                     return res.end(JSON.stringify({
                         success: false,
@@ -45,19 +52,21 @@ const server = http.createServer((req, res) => {
                     }));
                 }
 
+                const result = await generateAIResponse(data.message);
+
                 res.writeHead(200);
-                res.end(JSON.stringify({
-                    success: true,
-                    message: "Mensagem recebida pela NEXORA.",
-                    reply: "O servidor da NEXORA recebeu sua mensagem. A conexão com a inteligência artificial será implementada na próxima etapa."
-                }));
+                res.end(JSON.stringify(result));
 
             } catch (error) {
-                res.writeHead(400);
-                res.end(JSON.stringify({
-                    success: false,
-                    error: "Não foi possível processar sua solicitação."
-                }));
+                console.error("Erro na NEXORA:", error);
+
+                if (!res.destroyed) {
+                    res.writeHead(500);
+                    res.end(JSON.stringify({
+                        success: false,
+                        error: "Erro interno ao processar sua mensagem."
+                    }));
+                }
             }
         });
 
@@ -74,4 +83,3 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
     console.log(`NEXORA online na porta ${PORT}`);
 });
-
