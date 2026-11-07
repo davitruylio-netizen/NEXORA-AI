@@ -168,7 +168,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // RESPOSTA DEMONSTRATIVA
     // A IA REAL SERÁ CONECTADA AO BACKEND EM OUTRA ETAPA.
-    function showDemoResponse(userMessage) {
+    
+async function showDemoResponse(message) {
+    const API_URL = "";
+
+    if (API_URL) {
+        try {
+            const response = await fetch(`${API_URL}/api/chat`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message })
+            });
+
+            if (!response.ok) {
+                throw new Error("Erro na comunicação com o servidor.");
+            }
+
+            const data = await response.json();
+
+            renderMessage(
+                "assistant",
+                data.reply || "Mensagem recebida pela NEXORA."
+            );
+
+            return;
+
+        } catch (error) {
+            console.error("Erro na conexão:", error);
+            renderMessage(
+                "assistant",
+                "Não foi possível conectar ao servidor da NEXORA. Tente novamente mais tarde."
+            );
+            return;
+        }
+    }
+
+    renderMessage(
+        "assistant",
+        "A NEXORA recebeu sua mensagem! Nosso sistema está sendo preparado para conectar uma inteligência artificial real."
+    );
+}
+ {
 
         const loading = document.createElement("div");
         loading.className = "message loading";
