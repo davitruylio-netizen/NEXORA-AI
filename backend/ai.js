@@ -1,28 +1,61 @@
 
+const { GoogleGenAI } = require("@google/genai");
+
 async function generateAIResponse(message) {
     if (typeof message !== "string" || !message.trim()) {
-        throw new Error("A mensagem não pode estar vazia.");
+        throw new Error("Mensagem inválida.");
     }
 
-    const apiKey = process.env.AI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
         return {
             success: false,
-            reply: "A inteligência artificial da NEXORA ainda não foi configurada. Estamos preparando essa conexão."
+            reply: "A chave de inteligência artificial ainda não foi configurada no servidor."
         };
     }
 
-    // A conexão com o provedor de IA será implementada
-    // após escolhermos qual serviço utilizar.
+    try {
+        const ai = new GoogleGenAI({
+            apiKey: apiKey
+        });
 
-    return {
-        success: false,
-        reply: "O provedor de inteligência artificial ainda não foi conectado."
-    };
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: message,
+            config: {
+                systemInstruction: `
+Você é a NEXORA AI, uma inteligência artificial
+profissional criada para ajudar empresas,
+empreendedores e profissionais.
+
+Seu idioma padrão é português brasileiro.
+
+Seja inteligente, objetiva, educada e detalhada.
+Ajude com negócios, produtividade, planejamento,
+marketing, escrita, tecnologia e criatividade.
+
+Organize respostas complexas com títulos e listas.
+Nunca invente informações como se fossem fatos.
+                `
+            }
+        });
+
+        return {
+            success: true,
+            reply: response.text || "Não consegui gerar uma resposta."
+        };
+
+    } catch (error) {
+        console.error("Erro Gemini:", error);
+
+        return {
+            success: false,
+            reply: "Não consegui processar sua mensagem agora. Tente novamente."
+        };
+    }
 }
 
 module.exports = {
     generateAIResponse
 };
-
